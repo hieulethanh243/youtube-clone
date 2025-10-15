@@ -1,22 +1,19 @@
 export interface VideoItem {
-  id: string;
+  id: string | { videoId: string }; // 👈 thêm dòng này
   snippet: {
     title: string;
     description: string;
-    channelId: string;
     channelTitle: string;
     publishedAt: string;
     thumbnails: {
-      default: { url: string };
       medium: { url: string };
-      high: { url: string };
+      high?: { url: string };
     };
   };
   statistics?: {
     viewCount?: string;
-    likeCount?: string;
   };
-  channelThumbnail?: string; // ➕ thêm trường này để chứa avatar
+  channelThumbnail?: string;
 }
 
 export interface SearchItem {

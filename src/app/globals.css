@@ -32,3 +32,58 @@ body {
   -ms-overflow-style: none; /* IE & Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+/* 
+  ⚠️ CHÚ Ý: Việc chặn quảng cáo vi phạm YouTube ToS
+  Chỉ dùng cho mục đích học tập/phát triển
+  Thêm vào file globals.css hoặc layout.tsx
+*/
+
+/* 🚫 Ẩn các overlay quảng cáo */
+.ytp-ad-overlay-container,
+.ytp-ad-text-overlay,
+.ytp-ad-player-overlay,
+.ytp-ad-image-overlay,
+.ytp-ad-overlay-close-button,
+.ytp-ad-overlay-link,
+.ytp-ad-button,
+.video-ads,
+.ytp-ad-module {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  z-index: -9999 !important;
+}
+
+/* 🚫 Ẩn banner quảng cáo */
+.ytp-ce-element,
+.ytp-cards-teaser,
+.ytp-pause-overlay,
+.ytp-scroll-min,
+.ytp-watermark {
+  display: none !important;
+}
+
+/* 🚫 Ẩn video gợi ý cuối video */
+.ytp-endscreen-content,
+.ytp-ce-element-show,
+.ytp-suggestion-set {
+  display: none !important;
+}
+
+/* 🎯 Tăng tốc loading player */
+.ytp-spinner {
+  animation-duration: 0.3s !important;
+}
+
+/* 🎨 UI cải tiến */
+.youtube-player {
+  border: none;
+  outline: none;
+}
+
+/* ✅ Đảm bảo player hoạt động mượt */
+iframe[src*="youtube.com"] {
+  background: #000;
+  border-radius: inherit;
+}

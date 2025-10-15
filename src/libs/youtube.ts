@@ -107,3 +107,45 @@ export async function getVideoCategories(region = "VN") {
       title: c.snippet.title,
     }));
 }
+
+export async function getRelatedVideos(videoId: string) {
+  console.log("🎬 [getRelatedVideos] videoId:", videoId);
+
+  if (!videoId || typeof videoId !== "string") {
+    throw new Error(`❌ Invalid videoId: ${videoId}`);
+  }
+
+  const url = new URL(`${BASE}/search`);
+  url.searchParams.set("part", "snippet");
+  url.searchParams.set("relatedToVideoId", videoId);
+  url.searchParams.set("type", "video");
+  url.searchParams.set("maxResults", "12");
+  url.searchParams.set("key", API_KEY);
+
+  console.log("🔗 Related Videos API URL:", url.toString());
+
+  const res = await fetch(url.toString(), { cache: "no-store" });
+  console.log("🚀 ~ getRelatedVideos ~ res:", res);
+  if (!res.ok) {
+    const errText = await res.text();
+    console.error("❌ Related Videos Error:", errText);
+    throw new Error("Failed to fetch related videos");
+  }
+
+  const data = await res.json();
+  return data;
+}
+
+export async function getVideoDetail(videoId: string) {
+  const BASE = process.env.YOUTUBE_API_BASE_URL!;
+  const API_KEY = process.env.YOUTUBE_API_KEY!;
+
+  const url = new URL(`${BASE}/videos`);
+  url.searchParams.set("part", "snippet,statistics,contentDetails");
+  url.searchParams.set("id", videoId);
+  url.searchParams.set("key", API_KEY);
+
+  const res = await fetch(url.toString(), { cache: "no-store" });
+  if (!res.ok) throw new Error("Failed to fetch video detail");
+  return res.json();
+}

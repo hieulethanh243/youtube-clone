@@ -19,8 +19,7 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 inset-x-0 z-50 bg-white dark:bg-neutral-950">
-      <div className="flex items-center justify-between h-16 px-4 md:px-6 max-w-[1600px] mx-auto">
-        {/* LEFT: Logo */}
+      <div className="flex items-center justify-between h-16 px-4 md:px-6 mx-auto">
         <div className="flex items-center gap-4">
           <button className="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-neutral-800">
             <svg
@@ -53,7 +52,6 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* CENTER: Search bar */}
         <form
           onSubmit={handleSearch}
           className="hidden sm:flex items-center flex-1 max-w-2xl mx-4"

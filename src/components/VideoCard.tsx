@@ -1,9 +1,16 @@
 import Image from "next/image";
 import type { VideoItem } from "@/types/youtube";
 
+function getVideoId(v: VideoItem): string {
+  if (typeof v.id === "object" && "videoId" in v.id) {
+    return v.id.videoId;
+  }
+  return v.id;
+}
+
 export default function VideoCard({
   v,
-  layout = "grid", // "grid" | "list"
+  layout = "grid",
 }: {
   v: VideoItem;
   layout?: "grid" | "list";
@@ -22,10 +29,9 @@ export default function VideoCard({
   if (layout === "list") {
     return (
       <a
-        href={`/video/${v.id}`}
+        href={`/watch/${getVideoId(v)}`}
         className="flex gap-3 md:gap-4 group rounded-lg hover:bg-gray-50 dark:hover:bg-neutral-900 transition"
       >
-        {/* Thumbnail */}
         <div className="relative w-48 md:w-72 aspect-video flex-shrink-0 rounded-xl overflow-hidden">
           <Image
             src={thumb}
@@ -35,7 +41,6 @@ export default function VideoCard({
           />
         </div>
 
-        {/* Info */}
         <div className="flex flex-col justify-start gap-1">
           <h3 className="font-semibold text-sm md:text-base line-clamp-2 group-hover:text-red-600">
             {v.snippet.title}
@@ -61,9 +66,8 @@ export default function VideoCard({
     );
   }
 
-  // GRID layout (Home)
   return (
-    <a href={`/video/${v.id}`} className="group block">
+    <a href={`/watch/${getVideoId(v)}`} className="group block">
       <div className="relative w-full aspect-video rounded-xl overflow-hidden">
         <Image
           src={thumb}
