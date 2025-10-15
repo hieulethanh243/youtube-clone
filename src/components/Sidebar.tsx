@@ -14,7 +14,7 @@ export default function Sidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed top-16 left-0 z-40 w-20 md:w-56 bg-white dark:bg-neutral-950 h-[calc(100vh-4rem)]">
+    <aside className="fixed top-16 left-0 z-40 w-20 md:w-56 hidden md:block bg-white dark:bg-neutral-950 h-[calc(100vh-4rem)]">
       <nav className="flex flex-col gap-1 p-2">
         {sidebarItems.map((item) => (
           <Link

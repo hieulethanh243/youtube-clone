@@ -19,7 +19,8 @@ export default function RootLayout({
       <body className="bg-white dark:bg-neutral-950 text-gray-900 dark:text-gray-100">
         <Header />
         <Sidebar />
-        <div className="md:ml-56 pt-16">
+        <div className="ml-0 md:ml-56 pt-16">
+          {" "}
           <Suspense fallback={null}>
             <CategoryBar />
           </Suspense>

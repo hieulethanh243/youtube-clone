@@ -11,17 +11,17 @@ export async function getTrendingVideos(
   url.searchParams.set("part", "snippet,statistics");
   url.searchParams.set("chart", "mostPopular");
   url.searchParams.set("regionCode", region);
-  url.searchParams.set("maxResults", max.toString());
+  url.searchParams.set("maxResults", "50"); // ✅ Lấy 50 videos thay vì 24
   url.searchParams.set("key", API_KEY);
   if (categoryId && categoryId !== "all") {
     url.searchParams.set("videoCategoryId", categoryId);
   }
 
-  const res = await fetch(url.toString(), { next: { revalidate: 120 } });
+  const res = await fetch(url.toString(), { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to fetch trending videos");
   const data = await res.json();
 
-  // lấy avatar kênh (nếu muốn)
+  // Lấy avatar kênh
   const channelIds = [
     ...new Set(data.items.map((v: any) => v.snippet.channelId)),
   ];
@@ -39,7 +39,11 @@ export async function getTrendingVideos(
     channelThumbnail: channelMap.get(v.snippet.channelId),
   }));
 
-  return { items: merged };
+  // ✅ Shuffle và lấy random 24 videos
+  const shuffled = merged.sort(() => Math.random() - 0.5);
+  const selected = shuffled.slice(0, max);
+
+  return { items: selected };
 }
 
 export async function searchVideos(query: string, max = 24) {
