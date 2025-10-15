@@ -40,7 +40,6 @@ export default async function WatchPage({
   return (
     <div className="flex flex-col md:flex-row gap-6 p-4 md:p-6 max-w-[1600px] mx-auto">
       <div className="flex-1 min-w-0">
-        {/* ✅ Sử dụng component YouTubePlayer tùy chỉnh */}
         <YouTubePlayer videoId={videoId} title={snippet.title} />
 
         <h1 className="text-lg md:text-xl font-semibold mt-4">

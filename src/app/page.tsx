@@ -1,5 +1,7 @@
 import { getTrendingVideos } from "@/libs/youtube";
 import InfiniteScroll from "@/components/InfiniteScroll";
+import { Suspense } from "react";
+import CategoryBar from "@/components/CategoryBar";
 
 export default async function HomePage({
   searchParams,
@@ -11,6 +13,10 @@ export default async function HomePage({
 
   return (
     <div>
+      <Suspense fallback={null}>
+        <CategoryBar />
+      </Suspense>
+
       <InfiniteScroll
         initialVideos={data.items}
         region="VN"

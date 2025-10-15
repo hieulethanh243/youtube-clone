@@ -1,8 +1,6 @@
-import CategoryBar from "@/components/CategoryBar";
 import "./globals.css";
 import Header from "@/components/Header";
 import Sidebar from "@/components/Sidebar";
-import { Suspense } from "react";
 
 export const metadata = {
   title: "Youtube Clone",
@@ -21,9 +19,6 @@ export default function RootLayout({
         <Sidebar />
         <div className="ml-0 md:ml-56 pt-16">
           {" "}
-          <Suspense fallback={null}>
-            <CategoryBar />
-          </Suspense>
           <main className="p-4">{children}</main>
         </div>
       </body>
