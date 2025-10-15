@@ -32,7 +32,6 @@ export default function YouTubePlayer({ videoId, title }: YouTubePlayerProps) {
         );
       } catch (e) {
         // Cross-origin restriction, không thể access iframe
-        console.log("Cannot access iframe due to CORS");
       }
     }, 1000);
 

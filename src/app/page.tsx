@@ -1,13 +1,21 @@
 import { getTrendingVideos } from "@/libs/youtube";
-import VideoGrid from "@/components/VideoGrid";
+import InfiniteScroll from "@/components/InfiniteScroll";
 
-export default async function HomePage() {
-  const data = await getTrendingVideos();
-  const videos = data.items;
+export default async function HomePage({
+  searchParams,
+}: {
+  searchParams: { category?: string };
+}) {
+  const categoryId = searchParams.category || "all";
+  const data = await getTrendingVideos("VN", 24, categoryId);
 
   return (
     <div>
-      <VideoGrid items={videos} layout="grid" />
+      <InfiniteScroll
+        initialVideos={data.items}
+        region="VN"
+        categoryId={categoryId}
+      />
     </div>
   );
 }
