@@ -15,7 +15,7 @@ export default function RelatedVideos({ videoId }: { videoId: string }) {
       try {
         setLoading(true);
         const res = await fetch(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=15&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`
+          `${process.env.NEXT_PUBLIC_YOUTUBE_API_BASE_URL}/search?part=snippet&relatedToVideoId=${videoId}&type=video&maxResults=15&key=${process.env.NEXT_PUBLIC_YOUTUBE_API_KEY}`
         );
         const data = await res.json();
         setVideos(data.items || []);
